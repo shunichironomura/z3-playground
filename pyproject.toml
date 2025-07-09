@@ -1,44 +1,25 @@
 [project]
-name = "package-name-goes-here"
-version = "0.1.0"
-description = "Add your description here"
+name = "z3-playground"
+version = "0"
 readme = "README.md"
-authors = [
-    { name = "Shunichiro Nomura", email = "nomura@space.t.u-tokyo.ac.jp" },
-]
 requires-python = ">=3.13"
-dependencies = ["typing-extensions>=4.14.0"]
-
-[project.scripts]
-package-name-goes-here = "package_name_goes_here:main"
-
-[build-system]
-requires = ["uv_build>=0.7.19,<0.8.0"]
-build-backend = "uv_build"
+dependencies = ["z3-solver>=4.15.1.0"]
 
 [dependency-groups]
 dev = [
     "pre-commit>=4.2.0",
     { include-group = "ruff" },
     { include-group = "typing" },
-    { include-group = "test" },
 ]
 ruff = ["ruff>=0.11.13"]
-typing = [
-    "mypy>=1.16.1",
-    { include-group = "test" }, # For type checking test code
-]
-test = [
-    "pytest>=8.4.1",
-    # "coverage>=7.8.2", # If you use coverage
-]
-
-[tool.pytest.ini_options]
-addopts = "-ra --verbose --verbose --capture=no --strict-markers --color=yes --log-cli-level=INFO"
-testpaths = ["tests"]
+typing = ["mypy>=1.16.1"]
 
 [tool.mypy]
 strict = true
+
+[[tool.mypy.overrides]]
+module = ["z3.*"]
+ignore_missing_imports = true
 
 [tool.ruff]
 line-length = 120
@@ -46,14 +27,13 @@ line-length = 120
 [tool.ruff.lint]
 select = ["ALL"]
 
-# Modify the following rules according to your preferences
 ignore = [
-    #     "PLR2004", # magic numbers
-    "S101", # use of assert
-    "G",    # logging format
+    "PLR2004", # magic numbers
+    "S101",    # use of assert
+    "G",       # logging format
     #     "ANN101",  # missing type annotation for self in method
     #     "ANN102",  # missing type annotation for cls in classmethod
-    #     "D100",    # missing docstring in public module
+    "D100", # missing docstring in public module
     #     "D101",    # missing docstring in public class
     #     "D102",    # missing docstring in public method
     #     "D103",    # missing docstring in public function
@@ -71,12 +51,16 @@ ignore = [
     #     "PLR0913", # Too many arguments to function call
     #     "D407",    # Missing dashed underline after section
     #     "ERA001",  # Commented out code
-    "FIX002", # Fixme comment
+    "T201",    # Use of `print` is not allowed
+    "FIX002",  # Fixme comment
+    "PLR0915",
+    "FBT003",
     #     "S311",    # suspicious-non-cryptographic-random-usage
     #     "EM101",   # raw-string-in-exception
     #     "TRY003",  # Avoid specifying long messages outside the exception class
     # "UP040", # uses `TypeAlias` annotation instead of the `type` keyword. This is to be compatible with griffe.
-]
+    "INP001", # implicit-namespace-package
+] # Modify the following rules according to your preferences
 
 unfixable = [
     "F401", # Prevent auto-fix for unused imports
