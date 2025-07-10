@@ -5,7 +5,6 @@ def solve_two_numbers() -> None:
     """Solve the Two Numbers Riddle.
 
     Basic version: Find two numbers where sum = 10 and product = 21
-    Extended version: Add constraints like "both are prime" or "first is even"
     """
     s = Solver()  # ソルバーを作成
     x = Int("x")  # 整数変数xを作成
