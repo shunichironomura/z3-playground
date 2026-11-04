@@ -1,20 +1,9 @@
 {
     $schema: "https://docs.renovatebot.com/renovate-schema.json",
     extends: [
-        "config:recommended",
-    ],
-    labels: [
-        "dependencies",
+        "github>shunichironomura/renovate-config",
     ],
     packageRules: [
-        {
-            matchCategories: [
-                "ci",
-            ],
-            addLabels: [
-                "ci",
-            ]
-        },
         {
             matchManagers: [
                 "pep621",
@@ -25,7 +14,6 @@
             addLabels: [
                 "dev dependencies",
             ],
-            automerge: true,
         },
     ],
 }
